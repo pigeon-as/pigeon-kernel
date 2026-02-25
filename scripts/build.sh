@@ -37,10 +37,17 @@ build() {
   make -C "build/linux-${VERSION}" O="$(pwd)/build" ARCH="$(arch)" CROSS_COMPILE="$(cross_compile)" -j"$(nproc)" "$(basename "$(image)")"
 }
 
+dist() {
+  rm -rf "$(pwd)/dist"
+  mkdir -p "$(pwd)/dist"
+  cp "$(pwd)/build/$(image)" "$(pwd)/build/.config" "$(pwd)/dist/"
+}
+
 main() {
   mkdir -p "$(pwd)/build"
   download
   build
+  dist
 }
 
 main

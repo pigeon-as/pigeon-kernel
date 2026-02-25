@@ -23,4 +23,4 @@ get-config:
 	scripts/get-config.sh
 
 clean:
-	rm -rf build/ linux-*
+	rm -rf build/ dist/ linux-*

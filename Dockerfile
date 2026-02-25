@@ -25,4 +25,4 @@ COPY scripts/ scripts/
 RUN ARCH=${ARCH} VERSION=${VERSION} scripts/build.sh
 
 FROM scratch
-COPY --from=builder /src/build/ /
+COPY --from=builder /src/dist/ /
