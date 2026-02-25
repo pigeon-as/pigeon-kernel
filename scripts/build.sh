@@ -26,13 +26,13 @@ image() {
 }
 
 download() {
-  curl -fsSL "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${VERSION}.tar.xz" | tar -xJf -
+  curl -fsSL "https://cdn.kernel.org/pub/linux/kernel/v${VERSION%%.*}.x/linux-${VERSION}.tar.xz" | tar -xJf -
 }
 
 build() {
   cd "linux-${VERSION}"
   scripts/kconfig/merge_config.sh -m \
-    "../configs/microvm-kernel-ci-${ARCH}-6.1.config" \
+    "../configs/microvm-kernel-ci-${ARCH}-${VERSION%.*}.config" \
     "../configs/overlay.config"
   make ARCH="$(arch)" CROSS_COMPILE="$(cross_compile)" olddefconfig
   make ARCH="$(arch)" CROSS_COMPILE="$(cross_compile)" -j"$(nproc)" "$(basename "$(image)")"
